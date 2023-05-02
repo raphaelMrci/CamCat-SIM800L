@@ -3,16 +3,13 @@
 
 Camcat::Sim900::Sim900()
 {
-    _serial = new SoftwareSerial(CAMCAT_SIM800L_TX_PIN, CAMCAT_SIM800L_RX_PIN);
-    _serial->begin(9600);
-
+    Serial2.begin(
+    9600, SERIAL_8N1, CAMCAT_SIM800L_RX_PIN, CAMCAT_SIM800L_TX_PIN);
     _sendATCommand("AT");
-    _setMMSConfig();
-}
+    delay(1000);
+    std::string response = readSerial();
 
-Camcat::Sim900::~Sim900()
-{
-    delete _serial;
+    _setMMSConfig();
 }
 
 void Camcat::Sim900::_setMMSConfig()
@@ -50,30 +47,28 @@ void Camcat::Sim900::_setMMSConfig()
 void Camcat::Sim900::_sendATCommand(std::string command)
 {
     std::string result = "AT+" + command + "\r";
-    _serial->println(result.c_str());
+    Serial2.println(result.c_str());
 }
 
 std::string Camcat::Sim900::readSerial()
 {
     std::string response = "";
 
-    while (_serial->available()) {
-        response += (char) _serial->read();
+    while (Serial2.available()) {
+        response += (char) Serial2.read();
     }
     return response;
 }
 
 void Camcat::Sim900::sendSMS(std::string number, std::string text)
 {
-    _serial->print("CMGF=1\r");     // set SMS mode to text
+    _sendATCommand("CMGF=1");                  // set SMS mode to text
     delay(100);
-    _serial->print("CMGS=\"");      // send SMS command
-    _serial->print(number.c_str()); // recipient's mobile number
-    _serial->print("\"\r");
+    _sendATCommand("CMGS=\"" + number + "\""); // send SMS command
     delay(100);
-    _serial->print(text.c_str()); // message to send
+    _sendATCommand(text);                      // message to send
     delay(100);
-    _serial->write(26);           // ASCII equivalent of Ctrl+Z (end of message)
+    Serial2.write(26); // ASCII equivalent of Ctrl+Z (end of message)
     delay(100);
 }
 
@@ -175,7 +170,7 @@ std::string number, std::string text, std::string image)
         CAMCAT_DEBUG_PRINTLN("CMMSDOWN failed. ");
         return;
     }
-    _serial->print(image.c_str());
+    Serial2.print(image.c_str());
     delay(1000);
     response = readSerial();
     _sendATCommand("CMMSRECP=\"" + number + "\""); // Numéro du destinataire

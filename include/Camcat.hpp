@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include <string>
 
 #define CAMCAT_VERSION "1.0.0"
