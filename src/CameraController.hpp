@@ -1,19 +1,20 @@
 #pragma once
 
+#include "EEPROMManager.hpp"
 #include "esp_camera.h"
-
-#define EEPROM_SIZE 1
 
 namespace Camcat {
 
     class CameraController {
         public:
             CameraController();
+            ~CameraController();
 
             void takePicture();
 
         private:
             camera_config_t _cameraConfig;
+            EEPROMManager *_eepromManager;
             int _pictureNumber = 0;
     };
 } // namespace Camcat

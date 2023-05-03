@@ -1,8 +1,17 @@
 #include <Arduino.h>
+#include <EEPROM.h>
+#include "Camcat.hpp"
 
 void setup()
 {
-    // put your setup code here, to run once:
+    EEPROM.begin(EEPROM_SIZE);
+}
+
+void exitProgram()
+{
+    EEPROM.end();
+    CAMCAT_DEBUG_PRINTLN("Exiting program...");
+    exit(0);
 }
 
 void loop()

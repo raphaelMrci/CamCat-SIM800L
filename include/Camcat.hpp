@@ -24,11 +24,14 @@
 #define HREF_GPIO_NUM  23
 #define PCLK_GPIO_NUM  22
 
-/* SERIAL2 RX/TX */
+/* SERIAL2 RX/TX for SIM 900 */
 #define CAMCAT_SIM800L_TX_PIN 4
 #define CAMCAT_SIM800L_RX_PIN 5
 
-// #define NDEBUG
+#define EEPROM_SIZE 1
+
+/* Set debug output */
+// #define DEBUG_MODE
 
 namespace Camcat {
     struct Config {
@@ -44,12 +47,12 @@ namespace Camcat {
     };
 } // namespace Camcat
 
-#ifdef NDEBUG
-    #define CAMCAT_DEBUG_PRINT(x)
-    #define CAMCAT_DEBUG_PRINTLN(x)
-    #define CAMCAT_DEBUG_PRINTF(x, ...)
-#else
+#ifndef DEBUG_MODE
     #define CAMCAT_DEBUG_PRINT(x)       Serial.print(x)
     #define CAMCAT_DEBUG_PRINTLN(x)     Serial.println(x)
     #define CAMCAT_DEBUG_PRINTF(x, ...) Serial.printf(x, __VA_ARGS__)
+#else
+    #define CAMCAT_DEBUG_PRINT(x)
+    #define CAMCAT_DEBUG_PRINTLN(x)
+    #define CAMCAT_DEBUG_PRINTF(x, ...)
 #endif

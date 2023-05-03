@@ -52,9 +52,13 @@ Camcat::CameraController::CameraController()
         return;
     }
 
-    // initialize EEPROM with predefined size
-    EEPROM.begin(EEPROM_SIZE);
-    _pictureNumber = EEPROM.read(0) + 1;
+    _eepromManager = new EEPROMManager();
+    _pictureNumber = _eepromManager->readInt(0) + 1;
+}
+
+Camcat::CameraController::~CameraController()
+{
+    delete _eepromManager;
 }
 
 void Camcat::CameraController::takePicture()
