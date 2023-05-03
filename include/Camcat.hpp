@@ -31,13 +31,14 @@
 #define EEPROM_SIZE 1
 
 /* Set debug output */
-// #define DEBUG_MODE
+#define CAMCAT_DEBUG_MODE
 
 namespace Camcat {
     struct Config {
         public:
             String ssid;
             String password;
+            String recipientNum;
 
             String SIMPinCode;
 
@@ -47,12 +48,12 @@ namespace Camcat {
     };
 } // namespace Camcat
 
-#ifndef DEBUG_MODE
-    #define CAMCAT_DEBUG_PRINT(x)       Serial.print(x)
-    #define CAMCAT_DEBUG_PRINTLN(x)     Serial.println(x)
-    #define CAMCAT_DEBUG_PRINTF(x, ...) Serial.printf(x, __VA_ARGS__)
-#else
+#ifndef CAMCAT_DEBUG_MODE
     #define CAMCAT_DEBUG_PRINT(x)
     #define CAMCAT_DEBUG_PRINTLN(x)
     #define CAMCAT_DEBUG_PRINTF(x, ...)
+#else
+    #define CAMCAT_DEBUG_PRINT(x)       Serial.print(x)
+    #define CAMCAT_DEBUG_PRINTLN(x)     Serial.println(x)
+    #define CAMCAT_DEBUG_PRINTF(x, ...) Serial.printf(x, __VA_ARGS__)
 #endif

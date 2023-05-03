@@ -8,12 +8,11 @@ namespace Camcat {
         public:
             Network(String ssid, String password);
 
-            void sendRequest(String url, String data);
             void connect(String ssid, String password);
 
+            bool isConnected() const;
+
         private:
-            String _ssid;
-            String _password;
             bool _isConnected = false;
     };
 

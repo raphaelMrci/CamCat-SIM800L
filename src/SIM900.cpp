@@ -93,19 +93,19 @@ String Camcat::Sim900::readSerial()
     return response;
 }
 
-void Camcat::Sim900::sendSMS(String number, String text)
+void Camcat::Sim900::sendSMS(String text)
 {
-    _sendATCommand("CMGF=1");                  // set SMS mode to text
+    _sendATCommand("CMGF=1"); // set SMS mode to text
     delay(100);
-    _sendATCommand("CMGS=\"" + number + "\""); // send SMS command
+    _sendATCommand("CMGS=\"" + _config.recipientNum + "\""); // send SMS command
     delay(100);
-    _sendATCommand(text);                      // message to send
+    _sendATCommand(text);                                    // message to send
     delay(100);
     Serial2.write(26); // ASCII equivalent of Ctrl+Z (end of message)
     delay(100);
 }
 
-void Camcat::Sim900::sendMMS(String number, String text, String image)
+void Camcat::Sim900::sendMMS(String text, String image)
 {
     String response = "";
     // Envoi de MMS avec paramètre APN La poste mobile
@@ -205,7 +205,8 @@ void Camcat::Sim900::sendMMS(String number, String text, String image)
     Serial2.print(image);
     delay(1000);
     response = readSerial();
-    _sendATCommand("CMMSRECP=\"" + number + "\""); // Numéro du destinataire
+    _sendATCommand(
+    "CMMSRECP=\"" + _config.recipientNum + "\""); // recipient number
     delay(1000);
     response = readSerial();
     if (response.indexOf("OK") == -1) {

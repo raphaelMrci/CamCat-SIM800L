@@ -40,13 +40,15 @@ Camcat::Config Camcat::SDReader::readConfig()
     }
     if (!_jsonDocument["ssid"].is<String>()
     || !_jsonDocument["password"].is<String>()
-    || !_jsonDocument["pin_code"].is<String>()) {
+    || !_jsonDocument["pin_code"].is<String>()
+    || !_jsonDocument["recipient_number"].is<String>()) {
         CAMCAT_DEBUG_PRINTLN("Missing or incorrect SSID, Password or PIN code");
         return config;
     }
     config.ssid = _jsonDocument["ssid"].as<String>();
     config.password = _jsonDocument["password"].as<String>();
     config.SIMPinCode = _jsonDocument["pin_code"].as<String>();
+    config.recipientNum = _jsonDocument["recipient_number"].as<String>();
 
     if (_jsonDocument["apn"].is<String>())
         config.SIMAPN = _jsonDocument["apn"].as<String>();

@@ -20,7 +20,8 @@ namespace Camcat {
             "    \"apn\": \"\",\n"
             "    \"mmsc_url\": \"\",\n"
             "    \"mmsc_proxy\": \"\",\n"
-            "    \"pin_code\": \"\"\n"
+            "    \"pin_code\": \"\",\n"
+            "    \"recipient_number\": \"\"\n"
             "}\n";
     };
 } // namespace Camcat

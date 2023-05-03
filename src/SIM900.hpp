@@ -7,7 +7,6 @@
 #include "Camcat.hpp"
 
 namespace Camcat {
-
     struct MMSConfig {
         public:
             String mmscurl;
@@ -20,11 +19,11 @@ namespace Camcat {
             Sim900(Camcat::Config &config);
             ~Sim900() = default;
 
-            void sendSMS(String number, String text);
-            void sendMMS(String number, String text, String image);
+            void sendSMS(String text);
+            void sendMMS(String text, String image);
 
         private:
-            MMSConfig _mmsConfig;
+            Camcat::MMSConfig _mmsConfig;
             Camcat::Config _config;
 
             void _sendATCommand(String command);
