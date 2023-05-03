@@ -39,12 +39,14 @@ Camcat::Config Camcat::SDReader::readConfig()
         return config;
     }
     if (!_jsonDocument["ssid"].is<String>()
-    || !_jsonDocument["password"].is<String>()) {
-        CAMCAT_DEBUG_PRINTLN("Missing or incorrect SSID or Password");
+    || !_jsonDocument["password"].is<String>()
+    || !_jsonDocument["pin_code"].is<String>()) {
+        CAMCAT_DEBUG_PRINTLN("Missing or incorrect SSID, Password or PIN code");
         return config;
     }
     config.ssid = _jsonDocument["ssid"].as<String>();
     config.password = _jsonDocument["password"].as<String>();
+    config.SIMPinCode = _jsonDocument["pin_code"].as<String>();
 
     if (_jsonDocument["apn"].is<String>())
         config.SIMAPN = _jsonDocument["apn"].as<String>();
@@ -60,10 +62,6 @@ Camcat::Config Camcat::SDReader::readConfig()
         config.SIMMMSPROTO = _jsonDocument["mmsc_proto"].as<String>();
     else
         CAMCAT_DEBUG_PRINTLN("Missing MMSC Proxy");
-    if (_jsonDocument["pin_code"].is<int>())
-        config.SIMPinCode = _jsonDocument["pin_code"].as<String>();
-    else
-        CAMCAT_DEBUG_PRINTLN("Missing PIN code");
     return config;
 }
 

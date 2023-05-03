@@ -1,19 +1,20 @@
-
 #pragma once
 
+#include <Arduino.h>
 #include <string>
 
-// Http client
-class Network
-{
-  public:
-    Network(std::string ssid, std::string password);
+namespace Camcat {
+    class Network {
+        public:
+            Network(String ssid, String password);
 
-    void sendRequest(std::string url, std::string data);
-    void connect(std::string ssid, std::string password);
+            void sendRequest(String url, String data);
+            void connect(String ssid, String password);
 
-  private:
-    std::string _ssid;
-    std::string _password;
-    bool _isConnected = false;
-};
+        private:
+            String _ssid;
+            String _password;
+            bool _isConnected = false;
+    };
+
+} // namespace Camcat

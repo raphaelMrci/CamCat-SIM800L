@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SD.h>
 #include <string>
 #include "Camcat.hpp"
@@ -11,7 +13,7 @@ namespace Camcat {
             String readFile(String path);
 
         private:
-            std::string _defaultConfig =
+            String _defaultConfig =
             "{\n"
             "    \"ssid\": \"\",\n"
             "    \"password\": \"\",\n"

@@ -1,9 +1,8 @@
 #include "Network.hpp"
-#include "Camcat.hpp"
-#include <HTTPClient.h>
 #include <WiFi.h>
+#include "Camcat.hpp"
 
-Network::Network(std::string ssid, std::string password)
+Camcat::Network::Network(String ssid, String password)
 {
     if (WiFi.status() == WL_CONNECTED) {
         CAMCAT_DEBUG_PRINTLN("Already connected");
@@ -12,7 +11,7 @@ Network::Network(std::string ssid, std::string password)
     connect(ssid, password);
 }
 
-void Network::connect(std::string ssid, std::string password)
+void Camcat::Network::connect(String ssid, String password)
 {
     CAMCAT_DEBUG_PRINT("Connecting to WiFi network : ");
     CAMCAT_DEBUG_PRINTLN(ssid.c_str());

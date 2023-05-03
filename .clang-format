@@ -87,4 +87,4 @@ SpaceBeforeCpp11BracedList: 'true'
 SpaceBeforeRangeBasedForLoopColon: 'true'
 
 # To totally disable format
-DisableFormat: 'false'
+DisableFormat: 'true'
