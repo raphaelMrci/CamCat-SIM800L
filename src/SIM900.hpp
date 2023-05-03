@@ -8,9 +8,6 @@
 
 namespace Camcat {
 
-    const short CAMCAT_SIM800L_TX_PIN = 4;
-    const short CAMCAT_SIM800L_RX_PIN = 5;
-
     struct MMSConfig {
         public:
             String mmscurl;
